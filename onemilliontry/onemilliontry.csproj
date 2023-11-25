@@ -1,0 +1,73 @@
+<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="7.0.11" />
+    <PackageReference Include="Microsoft.Data.SqlClient" Version="5.1.1" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore" Version="7.0.10" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="7.0.10" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    
+  </ItemGroup>
+
+  
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <TargetFileName Include="configuration/0.cs" />
+    <Reference Include="/configuration/0.cs" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+    <TargetFileName Include="globalusing.cs" />
+    <Reference Include="globalusing.cs" />
+    
+  </ItemGroup>
+
+  <ItemGroup>
+        <TargetName Include="/services" />
+        <TargetFileName Include="services/0.cs" />
+        <TargetFileName Include="services/1.cs" />
+        <TargetFileName Include="services/2.cs" />
+        <TargetFileName Include="services/3.cs" />
+        <Reference Include="0.cs" />
+        <Reference Include="1.cs" />
+        <Reference Include="2.cs" />
+        <Reference Include="3.cs" />
+        <!-- <Reference Include="4.cs"/> -->
+  </ItemGroup>
+
+  <ItemGroup>
+        <TargetName Include="/configuration" />
+        <TargetFileName Include="configuration/0.cs" />
+        <!-- <TargetFileName Include="configuration/1.cs" />
+        <TargetFileName Include="configuration/2.cs" />
+        <TargetFileName Include="configuration/3.cs" /> -->
+        <Reference Include="0.cs" />
+        <!-- <Reference Include="1.cs"/>
+        <Reference Include="2.cs"/>
+        <Reference Include="3.cs"/> -->
+        <!-- <Reference Include="4.cs"/> -->
+  </ItemGroup>
+  
+  <ItemGroup>
+        <TargetName Include="/database" />
+        <TargetFileName Include="database/0.cs" />
+        <TargetFileName Include="database/1.cs" />
+        <TargetFileName Include="database/User.cs" />
+        <!-- <TargetFileName Include="configuration/3.cs" /> -->
+        <Reference Include="0.cs" />
+        <Reference Include="1.cs" />
+        <Reference Include="User.cs" />
+        <!-- <Reference Include="User.cs"/> -->
+  </ItemGroup>
+
+</Project>

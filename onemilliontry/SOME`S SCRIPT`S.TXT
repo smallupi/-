@@ -1,0 +1,245 @@
+USE TRASH_onemilliontry
+SELECT Id From Users
+INSERT 1
+INSERT INTO Users
+(Id,UserName,PassWord,Mail,Phone,Card,DATECREATED)
+VALUES(0,'HOLLYLIGHT','noodle17251','glich.snake@gmail.com','+3809595836691','03.10.2023');
+INSERT INTO Cards
+(ID,CVCard,DateCard)
+VALUES(0,767,03/20);
+INSERT INTO User_Information
+(ID, AGE, YearOfBirthday, MonthOfBirthday, DayOfBirthday, FIRSTNAME, LASTNAME)
+VALUES(0,25,1998,03,20,'SASHA','HL`UZA');
+
+WEB DEPLOY
+
+
+public delegate Task RequestDelegate(HttpContext context);
+public class Program
+{
+    public static void Main(string[] args)=>CreateHostBuilder(args).Build().Run();
+        public static IHostBuilder CreateHostBuilder(string[] args)
+            => CreateHostBuilder(args).Build().Run();
+        public static IHostBuilder CreateHostBuilder(string[] args)=>
+            Host.CreateDeafultBuilder(args)
+                .ConfigureWebHostDeafult(WebHostBuilder => 
+                    WebHostBuilder.UseStartup<Startup>());
+}
+public class Startup
+{
+    public void Configure(IApplicationBuilder application)
+    {
+        application.Use(async (context, next)=>{
+            if(context.Request.Path=="/")
+            {
+                await context.Response.SendFileAsync("/path");
+                return;
+            }
+            await next();
+        });
+    }
+}
+public static IApplicationBuilder Use(this IApplicationBuilder application, Func<HttpContext, Func<Task>, Task>middleware)
+{
+    return application.Use(next =>{
+        return context =>
+        {
+            Func<Task> simpleNext = () => next(context);
+            return middleware(context, simpleNext);
+        }
+    });
+}
+public IApplicationBuilder Use(Func<ReqeustDelegate, ReqestDelegate> middleware)
+{
+    _components.Add(middleware);
+    return this;
+}
+configurebuilder = StartupLoader.FindConfigureDelegate(startupType, context.HostingEnviroment.Enviroment);
+
+servies.Configure<GenericWebHostServiceOptions>(options=>{
+    options.ConfigureApplication =application =>
+    {
+        startupError?.Throw();
+
+        if(instance !=null && configureBuilder !=null)
+        {
+            configureBuilder.Build(instance)(application);
+        }
+    };
+});
+Action<IApplicationBuilder>configure = Options.ConfigureApplication;
+
+if(configure == null)
+{
+    throw new InvalidOpertionBuilderFactory.createBuilder(ServeFeatures);
+
+    foreach(var filter in StartupFilters.Reverse())
+    {
+        configure = filter.Configure(configure);
+    }
+
+    configure(builder);
+
+    application = builder.Build();
+}
+startupError?.Throw();
+
+if(instance !=null && configureBuilder != null)
+{
+    configureBuilder.Builder(instance)(application);
+}
+private void Invoke(object instance ,  IApplicationBuilder builder)
+{
+    using(var scope = builder.ApplicationServices.CreateScope())
+    {
+        var serviceProvider = scope.ServiceProvider;
+        var parameterInfos = MethodInfo.GetParametes();
+        var parameters = new object[parameterInfos.Length];
+        for(var index = 0; index< parameterInfos.Length; index++)
+        {
+            var parameterInfo = parameterInfos[index];
+            id(parameterInfo.ParameterType ==typeof(IApplicationBuilder))
+            {
+                parameters[index] = builder;
+            }
+            else
+            {
+                try{
+                    parameters[index] = serviceProvider.GetRequiredService(parameterInfo.ParameterType);
+
+                }
+                catch(Exception exception)
+                {
+                    throw new Exception (string.Format(
+                        "Could not resolve a service of type '{0}' for the parameter'{1}' of method'{2}' on type '{3}'.",
+                        parameterInfo.ParameterType.FullName,
+                        parameterInfo.Name,
+                        MethodInfo.Name,
+                        MethodInfo.DeclaringType.FullName
+                    ),exception);
+                    
+                }
+            }
+        }
+        MethodInfo.InvokeWithoutWrappingExceptions(instance, parameters);
+    }
+}
+public ReqeustDelegate Build()
+{
+    ReqestDelegate application = context =>
+    {
+        var endpoint = context.GetEndpoint();
+        var endpointRequestDelegate = endpoint?.ReqestDelegate;
+        if(endpointRequestDelegate != null)
+        {
+            var message = $"The request reached the end of pipeline without executing the endpoint:'{endpoint.DisplayName}'."+
+            $"Please register the EndpointMiddleware using '{nameof(IApplicationBuilder)}.UseEndpoints(...) if using'"+
+            $"routing.";
+            throw new InvalidOperationException(message);
+        }
+
+        context.Response.StatusCode = StatusCode.Status404NotFound;
+        return Task.CompleteTask;
+    };
+
+    foreach(var component in _components.Reverse())
+    {
+        application = component(application);
+    }
+
+    return application;
+}
+
+
+
+
+var application = WebApplication.Create(args);
+var port4000 = Environment.GetEnvironmentVariable("PORT") ?? "4000";
+
+if (application.Urls.Run($"http://localhost:4000"))
+{
+    application.Run($"http://localhost:{port4000}");
+}   
+
+
+var create = WebApplication.CreateBuilder(new WebApplicationOptions{
+                Args = args,
+                ApplicationName = typeof(Program).Assembly.FullName,
+                ContentRootPath = Directory.GetCurrentDirectory(),
+                // EnvironmentName = Environment.Staging,
+                WebRootPath = "htmlcss"
+            });
+            Console.WriteLine($"Application name:{create.Environment.ApplicationName}");
+            Console.WriteLine($"Enviroment Name: {create.Environment.EnvironmentName}");
+            Console.WriteLine($"ContentRoot Path: {create.Environment.ContentRootPath}");
+            Console.WriteLine($"WebRootPath: {create.Environment.WebRootPath}");
+
+
+            var application = WebApplication.Create(args);
+var port4000 = Environment.GetEnvironmentVariable("PORT") ?? "4000";
+var port5000 = Environment.GetEnvironmentVariable("PORT") ?? "5000";
+
+if (application.Run($"http://localhost:{port4000}"))
+{
+    application.Map("/root", async (context) =>
+    {
+        await context.Response.SendFileAsync("/data/root1.html");
+    });
+    application.Run();
+}
+else if(application.Run($"http://localhost:{port5000}"))
+{
+    application.Map("/root", async (context) =>
+    {
+        await context.Response.SendFileAsync("/data/root2.html");
+    });
+    application.Run();
+}
+var urls = new List<string>()
+            {
+                "http://*5000",
+                "http://localhost:5001"
+            };
+
+            var host = new WebHostBuilder()
+                        .UseKestrel()
+                        .UseStartup<Startup>()
+                        .Start(urls.ToArray());
+
+            using(host)
+            // using(host)
+            // {
+            //     host.Start();
+            //     Console.ReadLine("END");
+            // }
+
+using (var host = WebHost.Start("http://loacalhost:8080", application =>application.Response.SendFileAsync("path")))
+{
+    Console.WriteLine("Program is open:{WebHost.Start}");
+    host.WaitForShutdown();
+}
+using(var host = WebHost.Start(router => router)
+        .MapGet("hello/{name}",(reqeust, response, data)
+        =>
+            response.WriteAsync($"hello", {data.Values["name"]}!"))
+        .MapGet("throw/{message?}",(reqeust, response, data)
+        =>
+            response.WriteAsync($"{data.Values["greeting"]},{data.Values["name"]}!"))
+        .MapGet("",(reqeust, response, data)
+        => 
+            response.SendFileAsync("path"));
+
+using(var host = WebHost.StartWith(application=>
+    
+        application.Use(next=>{
+            return async context =>
+            {
+                await context.Response.WriteAsync("qwerty");
+                
+            }
+    })))
+    {
+        Console.WriteLine("program is open");
+        host.WaitForShutdown();
+    }
+ 

@@ -1,0 +1,135 @@
+@* @page
+@model User.CreateModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+<h1>
+    Create
+</h1>
+
+<h4>
+    User
+</h4>
+<hr/>
+<div class = "row">
+    <div class = "col-md-4">
+        <form method="post">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group">
+                <label asp-for="User.UserName" class="control-label"></label>
+                <input asp-for="User.UserName" class="from-control"/>
+                <span asp-validation-for="User.UserName" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="User.PassWord" class="control-label"></label>
+                <input asp-for="User.Password" class="from-control"/>
+                <span asp-validation-for="User.Password" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Mail" class="control-label"></label>
+                <input asp-for="User.MAil" class="from-control"/>
+                <span asp-validation-for="User.Mail" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <label asp-for="User.Mail" class="control-label"></label>
+                <input asp-for="User.Mail" class="from-control"/>
+                <span asp-validation-for="User.Mail" class="text-danger"></span>
+
+            </div>
+
+            <div class="form-group">
+                <label asp-for="User.Card" class="control-label"></label>
+                <input asp-for="User.Card" class="from-control"/>
+                <span asp-validation-for="User.Card" class="text-danger"></span>
+
+            </div>
+            <div class="form-group">
+                <input type="submit" vlaue="create" class="btn btn-primary"/>
+
+            </div>
+        </form>   
+    </div>
+</div>
+
+<div>
+    <a asp-page="Root">Back-To-List</a>
+</div>
+@section Script
+{
+    @{await Html.RenderPartialAsync("_ValidateScriptsPartial");}
+} *@
+@* @page
+@model RootModel;
+@* RazorPageModelUser. *@
+@* @{
+    ViewData["root"] = "root";
+}
+<h1>root</h1>
+<p>
+    <a asp-page="Create"CreateNew></a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => User[0].Id);
+            </th>
+            <th>
+                @Html.DisplayNameFor(modle => User[0].UserName);
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => User[0].Password);
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => User[0].Mail);
+            </th>
+            <th>
+                @Html.DisplayNameFor(modle => User[0].Phone);
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => User[0].Card);
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => User[0].DateCreated);
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        foreach(var item in Model.User){
+            <td>
+                @Html.DisplayFor(modelItem => User[0].Id);
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => User[0].UserName);
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => User[0].Password);
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => User[0].Mail);
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => User[0].Phone);
+            </td>
+            <td>
+                @Html.DisplayFor(model => User[0].Card);
+            </td>
+            <td>
+                @Html.DisplayFor(model => User[0].DateCreated);
+            </td>
+            <td>
+                <a>
+                    <asp-page="./Edit" asp-route-id="@item.Id">Edit</asp-page>
+                    <asp-page="./Details" asp-route-id="@item.Id">Details</asp-page>
+                    <asp-page="./Delete" asp-route-id="@item.Id">Delete</asp-page>
+                </a>
+            </td>
+            }
+    </tbody>
+</table> *@

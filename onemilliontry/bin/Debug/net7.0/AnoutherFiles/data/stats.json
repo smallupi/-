@@ -1,0 +1,25 @@
+[{
+    "name":"blank",
+    "isHasPrivelegi":false,
+    "age":0,
+    "lvl":[{
+        "math":0,
+        "physics":0,
+        "langueges":0,
+        "chemistry":0,
+        "biology":0,
+        "drawing":0,
+        "sculpting":0,
+        "music":0,
+        "philosophy":0
+    }],
+    "doucments":[{
+
+    }],
+    "abilitys":[{
+
+    }],
+    "trash oups stash or back pack":[{
+
+    }]
+}]

@@ -1,0 +1,49 @@
+[{
+    "onemilliontry":{
+        "dependecies":{
+            "Microsoft.Extentions.Configuration": "1.0.0",
+            "Microsoft.Extentions.Configuration.Json":"1.0.0",
+            "Microsoft.NETCore.Application":{
+                "version":"1.0.1",
+                "type":"platform"
+            },
+            "Microsoft.AspNetCore.Diagnostics":"1.0.0",
+            
+            "Microsoft.AspNetCore.Server.IISIntegration": "1.0.0",
+            "Microsoft.AspNetCore.Kestrel":"1.0.1",
+            "Microsoft.Extentions.Logging.Console":"1.0.0"
+        },
+        "tools":{
+            "Microsoft.AspNetCore.Server.IISIntegration.Tools":"1.0.0-preview-final"
+        },
+        "frameworks":{
+            "netcoreapp1.0":{
+                "imports":[
+                    "dotnet7.0",
+                    "portable-net45+win8"
+                ]
+            }
+        },
+        "buildOptions":{
+            "emitEntryPoint":true,
+            "preserveCompilationContext":true
+        },
+        "runtimeOptions":{
+            "emitEntryPoint":true,
+            "preserveCompilationContext":true
+        }
+    },
+    "runtimeOptions":{
+        "configurationsProperties":{
+            "System.GC.Server":true
+        }
+    },
+    "publishOptions":{
+        "include":[
+            "htmlcss",
+            "database",
+            "configuration",
+            "services"
+        ]
+    }
+}]

@@ -1,0 +1,467 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="utf-8"/>
+        <link rel="stylesheet" href="style.css">
+  <script>
+    // TRANSFER ALL PRODUCTS
+    async function GETProducts(){
+        
+        const response = await fetch("/api/product", {
+            method:"GET",
+            headers:{"Accept": "application/json"}
+        });
+        if(response.ok === true){
+            const products = await response.json();
+            const rows = document.querySelector("tbody");
+
+            products.forEach(product => rows.append(row(product)));
+        }
+    }
+    async function GETProduct(id){
+        const response = await fetch(`/api/product/{id}`,{
+            method: "GET",
+            headers: {"Accept":"application/json"}
+        });
+        if(response.ok === true){
+            const product = await response.json();
+            document.getElementById("ProductId").value = product.Id;
+            document.getElementById("ProductName").value = product.ProductName;
+            document.getElementById("ProductType").value = product.ProductType;
+            document.getElementById("CompanyName").value = product.CompanyName;
+            
+            document.getElementById("ProductPrice").value = product.ProductPrice;
+        }else{
+            const error = await response.json();
+            console.log(error.message);
+        }
+    }
+    async function CREATEProduct(ProductName,ProductType,CompanyName,ProductPrice){
+        const response = await fetch("/api/product",{
+            method:"POST",
+            headers:{"Accept":"application/json","Content-Type": "application/json"},
+            body: JSON.stringfy({
+                productname:ProductName,
+                producttype:ProductType,
+                companyname:CompanyName,
+                price:parseInt(ProductPrice, 10)
+            })
+        });
+        if(response.ok === true){
+            const product = await response.json();
+            document.querySelector("tbody").append(row(product));
+        }
+        else
+        {
+            const error = await response.json();
+            console.log(error.message);
+        }
+    }
+    async function EDITProduct(Id,ProductName,ProductType,CompanyName,ProductPrice){
+        const response = await fetch("/api/product",{
+            method:"PUT",
+            headers:{"Accept":"application/json", "Content-Type":"application/json"},
+            body:JSON.stringify({
+                id:Id,
+                productname:ProductName,
+                producttype:TypeProduct,
+                companyname:CompanyName,
+                productprice:parseInt(ProductPrice, 10)
+            })
+        });
+        if(response.ok === true){
+            const product = await response.json();
+            document.querySelector(`tr[data-rowid='${product.Id}']`).replaceWith(row(product));
+        }
+        else{
+            const error = await response.json();
+            console.log(error.message);
+        }
+    }
+    async function deleteUser(id){
+        const response = await fetch(`/api/product/{id}`,{
+            method: "DELETE",
+            headers: {"Accept": "application/json"}
+        });
+        if(response.ok === true){
+            const product = await response.json();
+            document.querySelector(`tr[data-rowid='${product.id}']`).remove();
+        }
+        else{
+            const error = await response.json();
+            console.log(error.message);
+        }
+    }
+    function reset(){
+        document.getElementById("ProductId").value=
+        document.getElementById("ProductName").value=
+        document.getElementById("ProductType").value=
+        document.getElementById("ProductPrice").value=
+        document.getElementById("CompanyName").value="";
+        
+    }
+    function row(product){
+        const tr = document.createElement("tr");
+        tr.setAttribute("data-rowid", product.Id);
+
+        const nameTd = document.createElement("td");
+        nameTd.append(product.ProductName);
+        tr.append(nameTd);
+
+        const typeTd = document.createElement("td");
+        typeTd.append(product.ProductType);
+        tr.append(typeTd);
+
+        const priceTd = document.createElement("td");
+        priceTd.append(product.ProductPrice);
+        tr.append(priceTd);
+
+        const companyTd = document.createElement("td");
+        companyTd.append(product.CompanyName);
+        tr.append(companyTd);
+
+        const removeLink = document.createElement("button");
+        removeLink.append("delete");
+        removeLink.addEventListener("click", async()=> await deleteProduct(product.Id));
+        linksTd.append(removeLink);
+        tr.appendChild(linksTd);
+        return tr;
+    }
+    document.getElementById("SaveButton").addEventListener("click", async()=>{
+        const id = document.getElementById("ProductId").value;
+        const productname = document.getElementById("ProductName").value;
+        const typeproduct = document.getElementById("ProductType").value;
+        const companyname = document.getElementById("CompanyName").value;
+        const productprice = docuemnt.getElementById("ProductPrice").value;
+        if(id === "")
+            await CREATEProduct(ProductName,ProductType,CompanyName,ProductPrice);
+        else
+            await EDITProduct(Id,ProductName,ProductType,CompanyName,ProductPrice);
+        reset();
+    });
+    GETProducts();
+  </script>
+<style>
+    
+/* CSS */
+.buttons{
+ justify-content: right;
+}
+.button-4 {
+    margin-top: 5%;
+  appearance: none;
+  background-color: #FAFBFC;
+  border: 1px solid rgba(27, 31, 35, 0.15);
+  
+  box-shadow: rgba(27, 31, 35, 0.04) 0 1px 0, rgba(255, 255, 255, 0.25) 0 1px 0 inset;
+  box-sizing: border-box;
+  color: #24292E;
+  cursor: pointer;
+  display: inline-block;
+  font-family: -apple-system, system-ui, "Segoe UI", Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+  font-size: 14px;
+  font-weight: 500;
+  line-height: 20px;
+  list-style: none;
+  
+  position: relative;
+  transition: background-color 0.2s cubic-bezier(0.3, 0, 0.5, 1);
+  user-select: none;
+  -webkit-user-select: none;
+  touch-action: manipulation;
+  vertical-align: middle;
+  white-space: nowrap;
+  word-wrap: break-word;
+}
+
+.button-4:hover {
+  background-color: #F3F4F6;
+  text-decoration: none;
+  transition-duration: 0.1s;
+}
+
+.button-4:disabled {
+  background-color: #FAFBFC;
+  border-color: rgba(27, 31, 35, 0.15);
+  color: #959DA5;
+  cursor: default;
+}
+
+.button-4:active {
+  background-color: #EDEFF2;
+  box-shadow: rgba(225, 228, 232, 0.2) 0 1px 0 inset;
+  transition: none 0s;
+}
+
+.button-4:focus {
+  outline: 1px transparent;
+}
+
+.button-4:before {
+  display: none;
+}
+
+.button-4:-webkit-details-marker {
+  display: none;
+}
+
+        .header {
+            max-width: 100%;
+            max-height: 25%;
+            display: content;
+            position: relative;
+        }
+
+        .navigation {
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            position: relative;
+            padding-bottom: 1%;
+            
+        }
+
+        .site-name {
+            padding-left: 5%;
+            padding-right: 10%;
+            text-decoration: none;
+            color: rgb(50, 97, 226);
+            font-size: 20px;
+        }
+
+        .market {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .forum {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .registration {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .authorization {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+        .panel{
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            position: relative;
+            padding-left: 34%;
+        }
+        .product{
+            padding-right: 4%;
+            text-decoration: none;
+            color: blue;
+        }
+
+
+
+        .body {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            text-align: center;
+        }
+
+        #sidebar-left {
+            width: 20%;
+            height: 100%;
+        }
+
+        #sidebar-right {
+            width: 20%;
+            height: 100%;
+        }
+
+        .data-body-inputoutput {
+            width: 60%;
+            height: 100%;
+        }
+
+        #registration-product {
+            position: relative;
+            display: inline-grid;
+            padding-left: 0%;
+            padding-right: 0%;
+            margin: 4%;
+        }
+
+        #registration-product p {
+            text-align: center;
+            text-decoration: dashed;
+            font-size: 20px;
+            color: rgb(12, 12, 41);
+        }
+
+        #registration-product input {
+            max-width: 100%;
+            align-items: center;
+            text-align: center;
+            border-color: rgb(43, 58, 100);
+            padding: 1%;
+            margin-top: 4%;
+            margin-left: 0%;
+            margin-right: 0%;
+        }
+
+        #registration-product input::placeholder {
+            color: black;
+        }
+
+        #registration-product .reset-button {
+            padding-left: 90%;
+            padding-top: 2%;
+        }
+        #registration-product .save-button {
+            padding-left: 90%;
+            padding-top: 2%;
+        }
+
+
+        
+        table{
+            width: 100%;
+            border:none;
+            margin-bottom: 20px;
+        }
+        table thead th{
+            padding: 10px;
+            font-weight: 500;
+            text-align: left;
+            line-height: 20px;
+            border-top: 2px solid #716561;
+            border-bottom: 2px solid #716561;
+            color: #444441;
+            font-size: 14px;
+        }
+
+        .table tbody td{
+            padding: 10px;
+            font-size: 14px;
+            line-height: 20px;
+            color:#444441;
+            border-top: 1px  solid #716561;
+        }
+
+        .footer {
+            width: 100%;
+            height: 15%;
+        }
+
+        .footer a {
+            padding: 1%;
+            text-align: center;
+            padding-right: 2%;
+        }
+
+        .contacts {
+            padding-left: 10%;
+            display: flex;
+        }
+    </style>
+    </head>
+
+    <body>
+        <div class=header>
+            <div class="navigation" id="navigation-panel">
+                <a class="site-name" href="/root">OneMillionTry</a>
+                <!-- <a class="market" href="market.html">market</a> -->
+                <a class="forum" href="forum.html">forum</a>
+                <a class="registration" href="/registration/user">registration</a>
+                <a class="authorization" href="/authorization/user">authorization</a>
+            </div>
+            <div class="panel">
+                <a class="product" href="/product">administrate product</a>
+                <a class="product" href="/product">product</a>
+            </div>
+        </div>
+        <div class="body">
+            <div id="sidebar-left" class="blank-side">
+                <div>
+                    <h2></h2>
+                    <p></p>
+    
+                </div>
+            </div>
+            <div class="data-body-inputoutput">
+                <form id="registration-product">
+                <p class="text">Create new product</p>
+                            
+                <input type="hidden" id="ProductId" placeholder=" Product ID"/>
+                <input type="text" id="ProductName" placeholder="Product Name"/>            
+                <input type="text" id="ProductType" placeholder="Product Type"/>            
+                <input type="text" id="CompanyName" placeholder="Company Name"/>
+                <input type="number" id="ProductPrice"placeholder="Product Price"/>
+                           
+                <div class="buttons">
+                    <button class="button-4" role="button" id="ResetButton">reset</button>
+                    <button class="button-4" role="button" id="SaveButton">save</button>
+                </div>
+                            
+                    
+                            
+                </form>
+                <div class="product-table">
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>PRODUCT ID</th>
+                                <th>PRODUCT NAME</th>
+                                <th>TYPE PRODUCT</th>
+                                <th>COMPAY NAME</th>
+                                <th>PRICE</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>blank</td>
+                                <td>blank</td>
+                                <td>blank</td>
+                                <td>blank</td>
+                                <td>blank</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div id="sidebar-right" class="blank-side">
+                <div>
+                    <h2></h2>
+                    <p></p>
+    
+                </div>
+            </div>
+        </div>
+    
+        <div class="footer">
+            <div class="contacts">
+    
+                <a>contacts:</a>
+                <a href="https://t.me/Yolight">teltgram</a>
+            </div>
+            <div class="Timer">
+                <a>Timer:</a>
+                <a id="Timer"></a>
+            </div>
+    
+            <div class="Time">
+                <a>Time:</a>
+                <a id="Time"></a>
+            </div>
+    
+        </div>
+    </body>
+</html>
+
+

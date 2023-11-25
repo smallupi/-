@@ -1,0 +1,59 @@
+@page
+@using onemilliontry.pages
+@model Root
+
+
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset = "urf-8"/>
+        <meta name = "viewport" content = "width=dewise-width initial-scale=1.0">
+        <title>none</title>
+        <link rel="stylesheet" href="style.css" asp-append-version="true"/>
+    </head>
+
+    <body>
+        <navigation> 
+            <a class="ONEMILLIONTRY" href="/root" asp-controller="Root" asp-action="Root">OneMillionTry</a>
+            <button class="NavigationButton" type="button" data-bs-toggle="colapse" data-bs-target="navigation-collapse" aria-controls="navbarSupportedContent" aria-expanded="false" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="NavigationElement"></span>
+            </button>
+            <div class="NavigationElement">
+                <ul class="NavigationElement">
+                    <li class="NavigationElement">
+                        <a class="NavigationElement"asp-area="" asp-controller="Root" asp-action="Root">Root</a>
+                    </li>
+                    <li class="NavigationElement">
+                        <a class="NavigationElement" asp-area="" asp-controller="Market" asp-action="Market">Market</a>
+                    </li>
+                        
+                </ul>
+            </div>
+        </navigation>
+
+        <renderbody>
+            <leftside role="leftside" class="BodyElement">
+                <div>
+                    <bamygril>
+
+                    </bamygril>
+                </div>
+            </leftside>
+            <mainside role="mainside" class="BodyElement">
+                @Model.RenderMessage
+            </mainside>
+            <rightside role="rightside" class="BodyElement"></rightsiderole>
+                <stathero>
+
+                </stathero>
+            </rightside>
+        </renderbody>
+
+        <footer>
+            <div class="contects">
+                <a>contacts:</a>
+                telegram: .YoLight <a href="https://t.me/Yolight"></a>
+            </div>
+            <Time id="Time"/>
+        </footer>
+    </body>

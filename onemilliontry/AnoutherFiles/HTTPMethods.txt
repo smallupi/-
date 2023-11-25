@@ -1,0 +1,18 @@
+GET - method requests a representation of the aspecified resource 
+GET - Метод  запрашивает представление указанного ресурса
+HEAD - method asks for a response identical to a GET requests, but  without the response body.
+HEAD -  Метод запрашивает ответ , идентичный запросам на получение, но без тела ответа
+POST - method submits an entity to the specidied resource, often causing a change in state or side effects on the server.
+POST - Метод отправляет обьект на указанный ресурс, что часто приводит к изменению или побочному эффекту на сервере.
+PUT - method replace all current representations of the targe resource with the request payload.
+PUT - Метод заменяет все текущие представления целевого ресурса полезными данными запроса
+DELETE - method deletes the specified resource.
+DELETE - методо удаляет спецефистические ресурсы
+CONNECT - method establishes a tunnel to the server identified by the target resource.
+CONNECT - метод устанавливает туннель к серверу, указанному целевому ресурсом
+OPTIONS - method describe the communication options for the target resource.
+OPTIONS - Метод описывает параметры связи для целевого ресурса
+TRACE - method performs a message loop-back test along the path to the target resource.
+TRACE - метод выполняет обратную проверку сообщения на пути к целевому ресурсу
+PATCH - method applies partial modifications to a resource.
+PATCH - method применяет частичные изменению к ресурсу.

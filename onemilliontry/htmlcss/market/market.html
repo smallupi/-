@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="none">
+
+<head>
+    <meta charset="UTF-8" content="width=device-width" />
+    <!-- <link rel="stylesheet" type="text/css" href="/onemilliontry/htmlcss/style.css"/> -->
+
+    <style>
+        .header {
+            max-width: 100%;
+            max-height: 25%;
+            display: content;
+            position: relative;
+        }
+
+        .navigation {
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            position: relative;
+            padding-bottom: 1%;
+            
+        }
+
+        .site-name {
+            padding-left: 5%;
+            padding-right: 10%;
+            text-decoration: none;
+            color: rgb(50, 97, 226);
+            font-size: 20px;
+        }
+
+        .market {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .forum {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .registration {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+
+        .authorization {
+            padding-right: 2%;
+            text-decoration: none;
+            color: blue;
+        }
+        .panel{
+            max-width: 100%;
+            max-height: 100%;
+            display: flex;
+            position: relative;
+            padding-left: 34%;
+        }
+        .product{
+            padding-right: 4%;
+            text-decoration: none;
+            color: blue;
+        }
+
+
+
+        .body {
+            width: 100%;
+            height: 60%;
+            display: flex;
+            text-align: center;
+        }
+
+        #sidebar-left {
+            width: 20%;
+            height: 100%;
+        }
+
+        #sidebar-right {
+            width: 20%;
+            height: 100%;
+        }
+
+        .data-body-inputoutput {
+            width: 60%;
+            height: 100%;
+        }
+
+
+        .footer {
+            width: 100%;
+            height: 15%;
+        }
+
+        .footer a {
+            padding: 1%;
+            text-align: center;
+            padding-right: 2%;
+        }
+
+        .contacts {
+            padding-left: 10%;
+            display: flex;
+        }
+    </style>
+
+    <script>
+        async function getTime(){
+            const response = await fetch("/api/root/time",{
+                method: "GET",
+                headers:{"Accept":"application/json"}
+            });
+            if(response.ok === true){
+                const time = await response.json();
+                document.getElementById("Time").value = time;
+            }
+            else{
+                const error = await response.json();
+                console.log(error.message);
+            }
+        }
+
+    </script>
+</head>
+
+<body>
+
+    <div class=header>
+        <div class="navigation" id="navigation-panel">
+            <a class="site-name" href="/root">OneMillionTry</a>
+            <!-- <a class="market" href="market.html">market</a> -->
+            <a class="forum" href="forum.html">forum</a>
+            <a class="registration" href="/registration/user">registration</a>
+            <a class="authorization" href="/authorization/user">authorization</a>
+        </div>
+        <div class="panel">
+            <a class="product" href="/product">administrate product</a>
+            <a class="product" href="/product">product list</a>
+        </div>
+    </div>
+
+    <div class="body">
+        <div id="sidebar-left" class="blank-side">
+            <div>
+                <h2></h2>
+                <p></p>
+
+            </div>
+        </div>
+        <div class="data-body-inputoutput">
+            some text
+        </div>
+        <div id="sidebar-right" class="blank-side">
+            <div>
+                <h2></h2>
+                <p></p>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">
+        <div class="contacts">
+
+            <a>contacts:</a>
+            <a href="https://t.me/Yolight">teltgram</a>
+        </div>
+        <div class="Timer">
+            <a>Timer:</a>
+            <a id="Timer"></a>
+        </div>
+
+        <div class="Time">
+            <a>Time:</a>
+            <a id="Time"></a>
+        </div>
+
+    </div>
+</body>
+
+</html>
